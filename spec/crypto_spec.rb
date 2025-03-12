@@ -43,16 +43,21 @@ describe 'Test card info encryption' do
   # TODO: Add tests for double transposition and modern symmetric key ciphers
   #       Can you DRY out the tests using metaprogramming? (see lecture slide)
   describe 'Using Double Transposition cipher' do
-    it 'should encrypt card information' do
-      enc = DoubleTranspositionCipher.encrypt(@cc.to_s, @key)
-      _(enc).wont_equal @cc.to_s
-      _(enc).wont_be_nil
-    end
+    test_cases = [
+      'Simple test case',
+      "Credit card:#{@cc}",
+      '1234567890',
+      "Symbols! @\#$%^&*()"
+    ]
+    test_cases.each do |str|
+      it "should encrypt and decrypt '#{str}' correctly" do
+        encrypted = DoubleTranspositionCipher.encrypt(str, @key)
+        decrypted = DoubleTranspositionCipher.decrypt(encrypted, @key)
 
-    it 'should decrypt text' do
-      enc = DoubleTranspositionCipher.encrypt(@cc.to_s, @key)
-      dec = DoubleTranspositionCipher.decrypt(enc, @key)
-      _(dec).must_equal @cc.to_s
+        _(encrypted).wont_equal str
+        _(encrypted).wont_be_nil
+        _(decrypted).must_equal str
+      end
     end
   end
 end
