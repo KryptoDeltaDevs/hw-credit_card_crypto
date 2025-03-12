@@ -44,10 +44,11 @@ describe 'Test card info encryption' do
   #       Can you DRY out the tests using metaprogramming? (see lecture slide)
   describe 'Using Double Transposition cipher' do
     test_cases = [
-      'Simple test case',
-      "Credit card:#{@cc}",
-      '1234567890',
-      "Symbols! @\#$%^&*()"
+      CreditCard.new('4003445625586231', '06/26', 'Dr. Aryanna Cruickshank Sr.', 'Visa').to_s,
+      CreditCard.new('4556883355997155', '07/26', 'Dale Auer', 'Visa').to_s,
+      CreditCard.new('4058687229674517', '06/25', 'Joana Schamberger', 'Visa').to_s,
+      CreditCard.new('4532243269229758', '03/27', 'Nathen Hoeger', 'Visa').to_s,
+      CreditCard.new('4024007129214507', '09/27', 'Trenton Strosin', 'Visa').to_s
     ]
     test_cases.each do |str|
       it "should encrypt and decrypt '#{str}' correctly" do
